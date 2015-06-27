@@ -25,6 +25,13 @@ export SHARNESS_VERSION
 : ${SHARNESS_TEST_EXTENSION:=t}
 export SHARNESS_TEST_EXTENSION
 
+# Public: The unsanitized TERM under which sharness is originally run
+#  Reset TERM to original terminal if found, otherwise save orignal TERM
+[ "x" = "x$SHARNESS_ORIG_TERM" ] &&
+		SHARNESS_ORIG_TERM=$TERM ||
+		TERM="$SHARNESS_ORIG_TERM"
+export SHARNESS_ORIG_TERM
+
 # Export SHELL_PATH
 : ${SHELL_PATH:=$SHELL}
 export SHELL_PATH
