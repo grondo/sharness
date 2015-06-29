@@ -783,14 +783,18 @@ rm -rf "$test_dir" || {
 #
 #  Load any extensions in $srcdir/sharness.d/*.sh
 #
-if test -d "${SHARNESS_TEST_SRCDIR}/sharness.d"; then
-	for file in "${SHARNESS_TEST_SRCDIR}"/sharness.d/*.sh; do
-		if test -n "$debug"; then
-			echo 2>&1 "Attempting to load ${file}"
+if test -d "${SHARNESS_TEST_SRCDIR}/sharness.d"
+	then
+	for file in "${SHARNESS_TEST_SRCDIR}"/sharness.d/*.sh
+		do
+		if test -n "$debug"
+		then
+			echo >&5 "sharness: loading extensions from ${file}"
 		fi
 		. "${file}"
-		if test $? != 0; then
-			echo 2>&1 "sharness: Error loading ${file}. Aborting."
+		if test $? != 0
+		then
+			echo >&5 "sharness: Error loading ${file}. Aborting."
 			exit 1
 		fi
 	done
