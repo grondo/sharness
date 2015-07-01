@@ -21,6 +21,9 @@ test_description='Test Sharness itself'
 
 . ./sharness.sh
 [ -z "$color" ] || test_set_prereq COLOR
+perl "$SHARNESS_TEST_DIRECTORY"/test-terminal.perl \
+	sh -c "test -t 1 && test -t 2" &&
+	test_set_prereq TTY
 
 test_expect_success 'success is reported like this' '
 	:
@@ -348,7 +351,7 @@ test_expect_success 'SHARNESS_ORIG_TERM propagated to sub-sharness' "
 	EOF
 	)
 "
-test_expect_success COLOR 'sub-sharness still has color' "
+test_expect_success COLOR,TTY 'sub-sharness still has color' "
 	run_sub_test_lib_test \
 	  test-color \
 	  'sub-sharness color check' \
