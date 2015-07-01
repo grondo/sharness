@@ -20,6 +20,7 @@
 test_description='Test Sharness itself'
 
 . ./sharness.sh
+[ -z "$color" ] || test_set_prereq COLOR
 
 test_expect_success 'success is reported like this' '
 	:
