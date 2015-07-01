@@ -34,6 +34,7 @@ test_terminal () {
 
 run_sub_test_lib_test () {
 	name="$1" descr="$2" # stdin is the body of the test code
+	prefix="$3"          # optionally run sub-test under command
 	mkdir "$name" &&
 	(
 		cd "$name" &&
@@ -52,7 +53,7 @@ run_sub_test_lib_test () {
 		cat >>".$name.t" &&
 		chmod +x ".$name.t" &&
 		export SHARNESS_TEST_SRCDIR &&
-		./".$name.t" --chain-lint >out 2>err
+		$prefix ./".$name.t" --chain-lint >out 2>err
 	)
 }
 
