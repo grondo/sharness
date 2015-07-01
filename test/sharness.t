@@ -348,6 +348,15 @@ test_expect_success 'SHARNESS_ORIG_TERM propagated to sub-sharness' "
 	EOF
 	)
 "
+test_expect_success COLOR 'sub-sharness still has color' "
+	run_sub_test_lib_test \
+	  test-color \
+	  'sub-sharness color check' \
+	  test_terminal <<-\\EOF
+	test_expect_success 'color is enabled' '[ -n \"\$color\" ]'
+	test_done
+	EOF
+"
 
 test_done
 
